@@ -1,3 +1,5 @@
+# __init__.py
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -16,7 +18,7 @@ def create_app():
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
-    CORS(app)  # Enable CORS
+    CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS
 
     from .routes import auth
     app.register_blueprint(auth, url_prefix='/api')
